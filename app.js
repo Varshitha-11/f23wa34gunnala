@@ -24,6 +24,21 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/mydata', mydataRouter);
 
+//Computation
+app.get('/computation', (req, res) => {
+  const { x } = req.query;
+  const randomValue = x ? parseFloat(x) : Math.random() * 100; 
+
+  // Use the Math.hypot function based on the last digit
+  const fn = 'Math.hypot';
+  const result = Math.hypot(randomValue);
+
+  // Construct the response string
+  const responseString = `${fn} applied to ${x ? x : randomValue} is ${result}`;
+
+  res.send(responseString);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
